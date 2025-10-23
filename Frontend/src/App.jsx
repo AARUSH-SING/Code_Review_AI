@@ -19,14 +19,22 @@ function App() {
   }`)
 
   const [ review, setReview ] = useState(``)
+  const [ isLoading, setIsLoading ] = useState(false)
 
   useEffect(() => {
     prism.highlightAll()
   }, [])
 
   async function reviewCode() {
-    const response = await axios.post('http://localhost:3000/ai/get-review', { code })
-    setReview(response.data)
+    setIsLoading(true)
+    try {
+      const response = await axios.post('https://code-review-ai-backend-gnqi.onrender.com', { code })
+      setReview(response.data)
+    } catch (error) {
+      console.error('Error getting review:', error)
+    } finally {
+      setIsLoading(false)
+    }
   }
 
   return (
@@ -51,7 +59,13 @@ function App() {
           </div>
           <div
             onClick={reviewCode}
-            className="review">Review</div>
+            className={`review ${isLoading ? 'loading' : ''}`}>
+            {isLoading ? (
+              <div className="spinner"></div>
+            ) : (
+              'Review'
+            )}
+          </div>
         </div>
         <div className="right">
           <Markdown
