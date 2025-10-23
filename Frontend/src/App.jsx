@@ -28,7 +28,7 @@ function App() {
   async function reviewCode() {
     setIsLoading(true)
     try {
-      const response = await axios.post('https://code-review-ai-backend-gnqi.onrender.com', { code })
+      const response = await axios.post('https://code-review-ai-backend-gnqi.onrender.com/ai/get-review', { code })
       setReview(response.data)
     } catch (error) {
       console.error('Error getting review:', error)
