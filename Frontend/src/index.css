@@ -1,11 +1,13 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Share Tech Mono', 'Courier New', monospace;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+  color-scheme: dark;
+  color: #00ff41;
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -13,13 +15,60 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Matrix rain background effect */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(0, 255, 65, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(0, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 0, 255, 0.1) 0%, transparent 50%);
+  animation: matrixPulse 4s ease-in-out infinite alternate;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes matrixPulse {
+  0% { opacity: 0.3; }
+  100% { opacity: 0.7; }
+}
+
+/* Glowing grid overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(rgba(0, 255, 65, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 255, 65, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridMove 20s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes gridMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
 a {
   font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+  color: #00ff41;
+  text-decoration: none;
+  text-shadow: 0 0 10px #00ff41;
+  transition: all 0.3s ease;
 }
 a:hover {
-  color: #535bf2;
+  color: #00ffff;
+  text-shadow: 0 0 20px #00ffff;
 }
 
 body {
@@ -28,41 +77,64 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
 }
 
 h1 {
+  font-family: 'Orbitron', monospace;
   font-size: 3.2em;
   line-height: 1.1;
+  color: #00ff41;
+  text-shadow: 0 0 20px #00ff41;
+  animation: glow 2s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from { text-shadow: 0 0 20px #00ff41, 0 0 30px #00ff41, 0 0 40px #00ff41; }
+  to { text-shadow: 0 0 10px #00ff41, 0 0 20px #00ff41, 0 0 30px #00ff41; }
 }
 
 button {
   border-radius: 8px;
-  border: 1px solid transparent;
+  border: 2px solid #00ff41;
   padding: 0.6em 1.2em;
   font-size: 1em;
   font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+  font-family: 'Share Tech Mono', monospace;
+  background: linear-gradient(45deg, #0a0a0a, #1a1a2e);
+  color: #00ff41;
   cursor: pointer;
-  transition: border-color 0.25s;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.3);
+  text-shadow: 0 0 5px #00ff41;
 }
 button:hover {
-  border-color: #646cff;
+  border-color: #00ffff;
+  color: #00ffff;
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+  text-shadow: 0 0 10px #00ffff;
+  transform: translateY(-2px);
 }
 button:focus,
 button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  outline: 2px solid #00ff41;
+  box-shadow: 0 0 15px rgba(0, 255, 65, 0.6);
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 12px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+  border: 1px solid #00ff41;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(45deg, #00ff41, #00ffff);
+  border-radius: 6px;
+  box-shadow: 0 0 10px rgba(0, 255, 65, 0.5);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(45deg, #00ffff, #ff00ff);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.7);
 }
