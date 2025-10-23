@@ -1,5 +1,4 @@
 const aiService = require("../services/ai.service");
-const Frontend_URL = https://code-review-ai-frontend-njcy.onrender.com;
 
 
 module.exports.getReview = async (req,res) => {
